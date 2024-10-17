@@ -54,7 +54,34 @@ function formatDate(date) {
     return `${day} ${hours}:${minutes}`;
 }
 
+//forecast
+function displayForecast() { 
+  let daysAbbrev = ['Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+  let forecastHtml = "";
+  
+  daysAbbrev.forEach(function (day) {
+    forecastHtml = forecastHtml + `
+        <div class="forecast-day">
+          <div class="forecast-date">${day}</div>
+          <div class="forecast-icon">🌤️</div>
+          <div class="forecast-temps">
+            <div class="forecast-temp">
+              <strong>15°</strong>
+            </div>
+            <div class="forecast-temp">9°</div>
+          </div>
+        </div>
+      `; 
+  });
+
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = forecastHtml;
+}
+
+
+
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
 searchCity("Asuncion");
+displayForecast();
