@@ -17,6 +17,8 @@ function refreshWeather(response) {
     humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
     windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
     temperatureElement.innerHTML = Math.round(temperature);
+
+    getForecast(response.data.city);
 }
 
 function searchCity(city) {
@@ -55,7 +57,15 @@ function formatDate(date) {
 }
 
 //forecast
-function displayForecast() { 
+function getForecast(city) {
+  let apiKey = "04b441f44d2aca3f825t4affa3587e0o";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  axios(apiUrl).then(displayForecast);
+}
+
+function displayForecast(response) {
+  console.log(response.data);
+  
   let daysAbbrev = ['Tue', 'Wed', 'Thu', 'Fri', 'Sat']
   let forecastHtml = "";
   
@@ -84,4 +94,4 @@ let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
 searchCity("Asuncion");
-displayForecast();
+
